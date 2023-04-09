@@ -6,10 +6,21 @@ import re
 with open("phonebook_raw.csv", encoding='utf8') as f:
     rows = csv.reader(f, delimiter=",")
     contacts_list = list(rows)
-pprint(contacts_list)
+# pprint(contacts_list)
 
 # 1. Выполните пункты 1-3 задания.
-'''В цикле '''
+name_pattern = r'\w+'
+names_list = []
+for contact in contacts_list[1:]:
+    name_ = re.findall(name_pattern, str(contact))
+    names_list.append(name_[0:3])
+pprint(names_list)
+'''
+если contact[0] не содержит запятых...; если содержит только одну...; если содержит две - ничего не делать
+если 
+'''
+
+
 # re.compile(r'')
 
 ## 2. Сохраните получившиеся данные в другой файл.
