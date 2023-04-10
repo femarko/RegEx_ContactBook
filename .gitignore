@@ -2,4 +2,5 @@ pyvenv.cfg
 Scripts/
 Lib/
 .idea/
+test.py
 
