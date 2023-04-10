@@ -3,4 +3,5 @@ Scripts/
 Lib/
 .idea/
 test.py
+__pycache__/
 
