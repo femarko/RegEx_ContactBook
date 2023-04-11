@@ -9,7 +9,7 @@ with open("phonebook_raw.csv", encoding='utf8') as f:
 # pprint(contacts_list)
 
 # 1. Поместить Фамилию, Имя и Отчество человека в поля lastname, firstname и surname соответственно
-for contact_index, contact in enumerate(contacts_list[1:]):
+for contact in contacts_list[1:]:
     words = re.findall(r'[А-Яёа-яё]+', str(contact))
     for iteration in range(3):
         if len(words) < iteration + 1:
