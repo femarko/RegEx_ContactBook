@@ -3,16 +3,17 @@ from pprint import pprint
 import csv
 import re
 
-
 with open("phonebook_raw.csv", encoding='utf8') as f:
     rows = csv.reader(f, delimiter=",")
     contacts_list = list(rows)
 # pprint(contacts_list)
 
-contacts_dict = {}
-
+# 1. Поместить Фамилию, Имя и Отчество человека в поля lastname, firstname и surname соответственно
 for contact_index, contact in enumerate(contacts_list[1:]):
-    words = re.findall(r'\w+', str(contact))
-    contacts_dict[contact_index] = {'person': dict(zip(contacts_list[0][0:3], words[0:3]))}
-pprint(contacts_dict)
-
+    words = re.findall(r'[А-Яёа-яё]+', str(contact))
+    for iteration in range(3):
+        if len(words) < iteration + 1:
+            contact[iteration] = ''
+        else:
+            contact[iteration] = words[iteration]
+pprint(contacts_list)
