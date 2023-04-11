@@ -17,21 +17,22 @@ if __name__ == '__main__':
     # ОЧИЩАЕМ ОТ ПУСТЫХ СТРОК. ОЧИЩЕННЫЕ ДАННЫЕ СКЛАДЫВАЕМ В СЛОВАРЬ
     contacts_list_clean = []  # список данных, очищенных от пустых строк
     count = 0
-    for contact in contacts_list[1:]:
-        print(count)
+    for contact_index, contact in enumerate(contacts_list[1:]):
+        print(contact_index)
         element_list = []
         for element in contact:
             if element == '':
                 continue
             else:
                 words = re.split(r'\s', element) # каждое поле записи превращается в список слов
-                print(words)
-                element_list.append(element)
-
-
-        contacts_list_clean.append(element_list)
-
+                # print(words)
+                element_list.append(words)
+        el_dict = dict(zip(dict_keys[0:2], words[0:2]))
+        target_list.append(el_dict)
         count += 1
+    # pprint(target_list)
+        # contacts_list_clean.append(element_list)
+
     # pprint(contacts_list_clean)
 
     # ПЫТАЕМСЯ РЕШИТЬ ЗАДАЧУ
