@@ -5,4 +5,5 @@ Lib/
 test.py
 __pycache__/
 another_test.py
+.~lock.phonebook_raw.csv#
 
