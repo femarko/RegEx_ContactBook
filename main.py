@@ -21,35 +21,18 @@ for contact_index, contact in enumerate(contacts_list[1:]):
     contact[-2] = re.sub(phone_pattern, subst, contact[-2])  # решение Задачи 2
     contacts_dict[contact_index + 1] = dict(zip(contacts_list[0], contact))
 
-'''СВЕРКА СПИСКА СО СЛОВАРЕМ'''
-duplicates_dict = {}
+# решение Задачи 3
+duplicates_list = []
 for key in contacts_dict.keys():
-    duplicates_list = []
+    indeces_list = []
     for index, entry in enumerate(contacts_list):
         if entry[0] == contacts_dict[key]['lastname'] and entry[1] == contacts_dict[key]['firstname']:
-            duplicates_list.append(index)
-            duplicates_dict[key] = duplicates_list
-pprint(duplicates_dict)
-duplicates_values_list = []
-for value in duplicates_dict.values():
+            indeces_list.append(index)
+            duplicates_list.append(indeces_list)
+duplicates_list_of_tuples = []
+for value in duplicates_list:
     if len(value) > 1:
-        duplicates_values_list.append(tuple(value))
-duplicates = list(set(duplicates_values_list))
-pprint(duplicates)
-print(duplicates[1][1])
-
-# for key, value in duplicates_dict.items():
-#     pprint(f'{type(key)} {key} -> {type(value)} {value}')
-
-
-    # if
-    # for keys in list(contacts_dict.keys())[cont_ind + 1 : len()
-    # if item[0] + item[1] ==
-
-
-# for contacts_dict_key in contacts_dict.keys():
-#     contacts_dict[contacts_dict_key]['lastname']
-#     print(f'contacts_dict_key: {contacts_dict_key}')
-#     for key, value in contacts_dict[contacts_dict_key].items():
-#         print(f'{key} -> {value}')
-#     print()
+        duplicates_list_of_tuples.append(tuple(value))
+duplicates_list_of_tuples = list(set(duplicates_list_of_tuples))
+pprint(duplicates_list_of_tuples)
+print(duplicates_list_of_tuples[1][1])
