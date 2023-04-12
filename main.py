@@ -26,10 +26,20 @@ duplicates_dict = {}
 for key in contacts_dict.keys():
     duplicates_list = []
     for index, entry in enumerate(contacts_list):
-        if entry[0] == contacts_dict[key]['lastname'] and entry[1] == contacts_dict[key]['firstname'] and index != key:
-            duplicates_list.append({index: entry})
+        if entry[0] == contacts_dict[key]['lastname'] and entry[1] == contacts_dict[key]['firstname']:
+            duplicates_list.append(index)
             duplicates_dict[key] = duplicates_list
 pprint(duplicates_dict)
+duplicates_values_list = []
+for value in duplicates_dict.values():
+    if len(value) > 1:
+        duplicates_values_list.append(tuple(value))
+duplicates = list(set(duplicates_values_list))
+pprint(duplicates)
+print(duplicates[1][1])
+
+# for key, value in duplicates_dict.items():
+#     pprint(f'{type(key)} {key} -> {type(value)} {value}')
 
 
     # if
