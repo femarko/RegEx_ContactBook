@@ -21,13 +21,14 @@ for contact_index, contact in enumerate(contacts_list[1:]):
     contact[-2] = re.sub(phone_pattern, subst, contact[-2])  # решение Задачи 2
     contacts_dict[contact_index + 1] = dict(zip(contacts_list[0], contact))
 
+'''СВЕРКА СПИСКА СО СЛОВАРЕМ'''
 duplicates_dict = {}
 for key in contacts_dict.keys():
     duplicates_list = []
     for index, entry in enumerate(contacts_list):
         if entry[0] == contacts_dict[key]['lastname'] and entry[1] == contacts_dict[key]['firstname'] and index != key:
-            duplicates_list.append(entry)
-    duplicates_dict[key] = {index: duplicates_list}
+            duplicates_list.append({index: entry})
+            duplicates_dict[key] = duplicates_list
 pprint(duplicates_dict)
 
 
