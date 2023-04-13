@@ -22,6 +22,7 @@ for contact_index, contact in enumerate(contacts_list[1:]):
     contacts_dict[contact_index + 1] = dict(zip(contacts_list[0], contact))
 
 # решение Задачи 3
+'''ПОЛУЧАЕМ ИНДЕКСЫ ДУБЛИРУЮЩИХСЯ ЗАПИСЕЙ (В ВИДЕ КОРТЕЖЕЙ)'''
 duplicates_list = []
 for key in contacts_dict.keys():
     indeces_list = []
@@ -34,5 +35,8 @@ for value in duplicates_list:
     if len(value) > 1:
         duplicates_list_of_tuples.append(tuple(value))
 duplicates_list_of_tuples = list(set(duplicates_list_of_tuples))
-pprint(duplicates_list_of_tuples)
-print(duplicates_list_of_tuples[1][1])
+
+'''ПЕЧАТАЕМ ДУБЛИРУЮЩИЕСЯ ЗАПИСИ'''
+for duplicate in duplicates_list_of_tuples:
+    for element in range(len(duplicate)):
+        print(contacts_list[duplicate[element]])
