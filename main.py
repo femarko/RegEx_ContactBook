@@ -35,8 +35,22 @@ for value in duplicates_list:
     if len(value) > 1:
         duplicates_list_of_tuples.append(tuple(value))
 duplicates_list_of_tuples = list(set(duplicates_list_of_tuples))
+print(duplicates_list_of_tuples)
 
-'''ПЕЧАТАЕМ ДУБЛИРУЮЩИЕСЯ ЗАПИСИ'''
-for duplicate in duplicates_list_of_tuples:
-    for element in range(len(duplicate)):
-        print(contacts_list[duplicate[element]])
+# '''СОЗДАЕМ СПИСОК ДУБЛИРУЮЩИХСЯ ЗАПИСЕЙ (СПИСОК СПИСКОВ)'''
+# duplicated_entries_dict = {}
+# for duplicate in duplicates_list_of_tuples:
+#     auxiliary_list = []
+#     for element in range(len(duplicate)):
+#         auxiliary_list.append(contacts_list[duplicate[element]])
+#     duplicated_entries_dict.setdefault(auxiliary_list)
+# # pprint(duplicated_entries_list)
+duplicates_dict = {}
+for index, duplicate in enumerate(duplicates_list_of_tuples):
+    auxiliary_list = []
+    for element in duplicate:
+        # l.append(contacts_dict[duplicate[element]])
+        auxiliary_list.append({element: contacts_dict[element]})
+    duplicates_dict[index] = auxiliary_list
+# pprint(duplicates_dict)
+
