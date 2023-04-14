@@ -44,13 +44,21 @@ class Contact_book:
         for header_index, header in enumerate(self.headers):
             values_indicies_list = []
             for entry_index, entry in enumerate(self.correct_names_and_phones()):
-                values_indicies_list.append({entry_index: entry[header_index]})
+                values_indicies_list.append(entry[header_index])
             entries_dict[header] = values_indicies_list
         return entries_dict
 
-    # def duplicates(self):
-    #     if self.correct_names_and_phones()
-    #     if len(self.entries_dict()[self.headers[0]]) != lenset((self.entries_dict()[self.headers[0]]))
+    def duplicates(self, *field_to_check):
+
+        if len(self.entries_dict()[self.headers[0]]) != len(str(set(self.entries_dict()[self.headers[0]]))) and \
+                len(self.entries_dict()[self.headers[1]]) != len(str(set(self.entries_dict()[self.headers[1]]))):
+            print(self.entries_dict()[self.headers[0]])
+            print(self.entries_dict()[self.headers[1]])
+        #
+        # for index in range(len(self.entries)):
+        #     print(f'{self.entries_dict()[self.headers[0]][index]} {index}')
+        # if self.correct_names_and_phones()
+        # if len(self.entries_dict()[self.headers[0]]) != lenset((self.entries_dict()[self.headers[0]]))
 
     '''def _get_duplicates_list_of_tuples(self):
         duplicates_list = []
