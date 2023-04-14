@@ -34,21 +34,24 @@ class Contact_book:
         return entries_dict
 
     def duplicates_info(self, *fields):
-        for field in fields:
+        duplicates_dict = {}
+        if len(fields) == 0:
+            fields_to_check = self.headers
+        else:
+            fields_to_check = fields
+        for field in fields_to_check:
+            duplicates_dict.setdefault(field, {})
             if len(self.entries_dict()[field]) != len(str(set(self.entries_dict()[field]))):
-                duplicates_dict = {}
                 for element_index, element in enumerate(self.entries_dict()[field]):
-                    duplicates_dict[element] = [self.entries_dict()[field].index(element)]
+                    duplicates_dict[field][element] = [self.entries_dict()[field].index(element)]
                 for element_index, element in enumerate(self.entries_dict()[field]):
                     if element_index != self.entries_dict()[field].index(element):
-                        duplicates_dict[element].append(element_index)
+                        duplicates_dict[field][element].append(element_index)
                 keys_to_delete_list = []
                 for key in duplicates_dict.keys():
-                    if len(duplicates_dict[key]) == 1:
-                        keys_to_delete_list.append(key)
-                for key_to_del in keys_to_delete_list:
-                    del(duplicates_dict[key_to_del])
+                    for key_element in duplicates_dict[key].keys():
+                        if len(duplicates_dict[key][key_element]) == 1:
+                            keys_to_delete_list.append(key_element)
+                    for key_to_del in keys_to_delete_list:
+                        del (duplicates_dict[key][key_to_del])
         return duplicates_dict
-
-    # def duplicates_del(self):
-    #     for key in
