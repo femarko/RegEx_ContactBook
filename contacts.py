@@ -10,21 +10,6 @@ class Contact_book:
         self.all_data, self.headers, self.entries = read_file(self.file_name)
         self.reg_ex_patterns = reg_ex_patterns
 
-    # def contacts_dict(self):
-    #     '''ключи - индексы'''
-    #     contacts_dict = {}
-    #     for contact_index, contact in enumerate(self.entries):
-    #         words = re.findall(r'[А-Яёа-яё]+', str(contact))
-    #         for iteration in range(3):  # решение Задачи 1
-    #             if len(words) < iteration + 1:
-    #                 contact[iteration] = ''
-    #             else:
-    #                 contact[iteration] = words[iteration]
-    #         contact[-2] = re.sub(self.reg_ex_patterns.phone_pattern,
-    #                              self.reg_ex_patterns.subst, contact[-2])
-    #         contacts_dict[contact_index + 1] = dict(zip(self.headers, contact))  # ключи - индексы
-    #     return contacts_dict
-
     def correct_names_and_phones(self):
         correct_names_and_phones_list= []
         for contact_index, contact in enumerate(self.entries):
@@ -48,7 +33,7 @@ class Contact_book:
             entries_dict[header] = values_indicies_list
         return entries_dict
 
-    def duplicates(self, *fields):
+    def duplicates_info(self, *fields):
         for field in fields:
             if len(self.entries_dict()[field]) != len(str(set(self.entries_dict()[field]))):
                 duplicates_dict = {}
@@ -61,6 +46,9 @@ class Contact_book:
                 for key in duplicates_dict.keys():
                     if len(duplicates_dict[key]) == 1:
                         keys_to_delete_list.append(key)
-                for key in keys_to_delete_list:
-                    del(duplicates_dict[key])
+                for key_to_del in keys_to_delete_list:
+                    del(duplicates_dict[key_to_del])
         return duplicates_dict
+
+    # def duplicates_del(self):
+    #     for key in
