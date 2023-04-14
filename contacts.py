@@ -55,3 +55,13 @@ class Contact_book:
                     for key_to_del in keys_to_delete_list:
                         del (duplicates_dict[key][key_to_del])
         return duplicates_dict
+
+    # def duplicates_del(self, *fields):
+    #     if len(fields) == 0:
+    #         fields_to_check = self.headers
+    #     else:
+    #         fields_to_check = fields
+    #     for field in fields_to_check:
+    #         print(field)
+    #         for key in self.duplicates_info()[field].keys():
+    #             print(self.duplicates_info()[field][key])
