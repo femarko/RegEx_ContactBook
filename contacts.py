@@ -76,5 +76,16 @@ class Contact_book:
         for pare_of_entries in list_1:
             if list_2[list_1.index(pare_of_entries)] == pare_of_entries:
                 entries_to_merge_list.append(pare_of_entries)
-        print(entries_to_merge_list)
 
+        if entries_to_merge_list:
+            for list_ in entries_to_merge_list:
+                print(f'list_ {type(list_)} {list_}')
+                for entry_index in list_:
+                    print(entry_index)
+                    print(self.entries[entry_index])
+                    print(self.entries_dict()[fi[
+                    # entries_couple = zip(self.entries_dict()[field_1][[entry_index]], self.entries_dict()[field_2][[entry_index]])
+                    # for i in entries_couple:
+                    #     print(i)
+        else:
+            return
