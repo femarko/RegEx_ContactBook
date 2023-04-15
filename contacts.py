@@ -74,18 +74,27 @@ class Contact_book:
         list_2 = self.duplicates_compare()[field_2]
         entries_to_merge_list = []
         for pare_of_entries in list_1:
+            pare_of_entries_list = []
             if list_2[list_1.index(pare_of_entries)] == pare_of_entries:
-                entries_to_merge_list.append(pare_of_entries)
+                pare_of_entries_list.append(pare_of_entries)
+            entries_to_merge_list.append(pare_of_entries)
+        pprint(entries_to_merge_list)
+
 
         if entries_to_merge_list:
+            list_to_zip = []
             for list_ in entries_to_merge_list:
                 print(f'list_ {type(list_)} {list_}')
+                entries_to_merge = []
                 for entry_index in list_:
-                    print(entry_index)
-                    print(self.entries[entry_index])
-                    print(self.entries_dict()[fi[
-                    # entries_couple = zip(self.entries_dict()[field_1][[entry_index]], self.entries_dict()[field_2][[entry_index]])
-                    # for i in entries_couple:
-                    #     print(i)
+                    entries_to_merge.append(self.entries[entry_index])
+                list_to_zip.append(entries_to_merge)
         else:
             return
+        pprint((list_to_zip))
+
+        zipped = []
+        if list_to_zip:
+            for item in list_to_zip:
+                zipped.append(zip(item))
+        print(zipped)
