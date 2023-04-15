@@ -73,11 +73,13 @@ class Contact_book:
 
     def duplicates_compare(self, *fields):
         general_list = []
-        for field_index, field in enumerate(fields):
+        for field in fields:
             field_dict = {field:[]}
             for key in self.duplicates_info()[field].keys(): # <- список ключей к спискам номеров записей
-                # field_list.append({field: self.duplicates_info()[field][key]})
                 field_dict[field].append(self.duplicates_info()[field][key])
             general_list.append(field_dict)
         return general_list
 
+    def duplicates_merge(self, *fields):
+        for field in fields:
+            pass
