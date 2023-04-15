@@ -89,12 +89,19 @@ class Contact_book:
                 for entry_index in list_:
                     entries_to_merge.append(self.entries[entry_index])
                 list_to_zip.append(entries_to_merge)
+            
         else:
             return
         pprint((list_to_zip))
 
+
         zipped = []
         if list_to_zip:
+
             for item in list_to_zip:
-                zipped.append(zip(item))
+                for el in item:
+                    zipped.append(zip(item))
         print(zipped)
+
+        for i in zipped[0]:
+            print(i)
