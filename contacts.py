@@ -56,7 +56,7 @@ class Contact_book:
                         del (duplicates_dict[key][key_to_del])
         return duplicates_dict
 
-    # def duplicates_del(self, *fields):
+    # def duplicates_compare(self, *fields):
     #     if len(fields) == 0:
     #         fields_to_check = self.headers
     #     else:
@@ -71,15 +71,8 @@ class Contact_book:
     #     list_of_lists_of_duplicated_entries_indicies.append(list_of_entries_with_duplicates_within_the_field)
     #     return list_of_lists_of_duplicated_entries_indicies
 
-    def duplicates_del(self, *fields, **fields_pairs):
+    def duplicates_compare(self, *fields):
         general_list = []
-        '''
-        для каждого field (фамилия) - получаем список номеров (их может быть несколько)
-        по каждому номеру из списка проверяем, совпадает ли его имя с именем этого номера 
-        в каждом списке каждый номер сравнить с этим же номером но другим field
-        :param fields: 
-        :return: 
-        '''
         for field_index, field in enumerate(fields):
             field_dict = {field:[]}
             for key in self.duplicates_info()[field].keys(): # <- список ключей к спискам номеров записей
