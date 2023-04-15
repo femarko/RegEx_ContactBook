@@ -152,10 +152,14 @@ class Contact_book:
         for field in fields_to_check[1:]: # итерируемся по кортежу аргументов, кроме первого аргумента
             for num, nested_list in enumerate(self.duplicates_compare()[fields[0]]): # итерируемся по списку из [field_to_check]
                 if self.duplicates_compare()[field][num] == self.duplicates_compare()[fields[0]][num]:
-                    tuples_list = []
+                    result = True
+
+        if result:
+            for item in self.headers:
+                for num, nested_list in enumerate(self.duplicates_compare()[item]):
                     for position, index_ in enumerate(nested_list):  # итерируемся по вложенному списку - создаем список кортежей
-                        print(self.entries_dict()[fields[0]][index_])
-                        print(self.entries_dict()[field][self.duplicates_compare()[field][num][position]])
+                        print(f'{self.entries_dict()[item][index_]} | {item} {nested_list} {position}')
+                        print(f'{self.entries_dict()[item][self.duplicates_compare()[item][num][position]]} | {item} {nested_list} {position}')
                         # tuples_list.append(
                         #     zip(self.entries_dict()[fields[0]][index_], self.entries_dict()[self.duplicates_compare()[field][num][index_]])
                         # )
