@@ -69,11 +69,12 @@ class Contact_book:
             general_dict.setdefault(field, field_list)
         return general_dict
 
-    def duplicates_merge(self, *fields):
-        if self.duplicates_compare()[0][fields[0]][0] == self.duplicates_compare()[fields[1]][0][0]:
-            print(dict_[fields[0]][0][0])
-            # pass
-            # for dict_ in self.duplicates_compare():
-            # print(i)
-                # for entry in list_:
-                #     if self.entries[entry]
+    def duplicates_merge(self, field_1, field_2):
+        list_1 = self.duplicates_compare()[field_1]
+        list_2 = self.duplicates_compare()[field_2]
+        entries_to_merge_list = []
+        for pare_of_entries in list_1:
+            if list_2[list_1.index(pare_of_entries)] == pare_of_entries:
+                entries_to_merge_list.append(pare_of_entries)
+        print(entries_to_merge_list)
+
