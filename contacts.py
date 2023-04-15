@@ -56,30 +56,24 @@ class Contact_book:
                         del (duplicates_dict[key][key_to_del])
         return duplicates_dict
 
-    # def duplicates_compare(self, *fields):
-    #     if len(fields) == 0:
-    #         fields_to_check = self.headers
-    #     else:
-    #         fields_to_check = fields
-    #     list_of_lists_of_duplicated_entries_indicies = []
-    #     for field in fields_to_check: # уровень поля
-    #         list_of_entries_with_duplicates_within_the_field = []
-    #         duplicates_of_one_value = []
-    #         for key in self.duplicates_info()[field].keys(): # уровень дублированных значений внутри поля
-    #             duplicates_of_one_value.append(self.duplicates_info()[field][key]) # кладем список номеров дублир записей для одного значения в список
-    #         list_of_entries_with_duplicates_within_the_field.append(duplicates_of_one_value)
-    #     list_of_lists_of_duplicated_entries_indicies.append(list_of_entries_with_duplicates_within_the_field)
-    #     return list_of_lists_of_duplicated_entries_indicies
-
     def duplicates_compare(self, *fields):
+        if len(fields) == 0:
+            fields_to_check = self.headers
+        else:
+            fields_to_check = fields
         general_list = []
-        for field in fields:
+        for field in fields_to_check:
             field_dict = {field:[]}
-            for key in self.duplicates_info()[field].keys(): # <- список ключей к спискам номеров записей
+            for key in self.duplicates_info()[field].keys():
                 field_dict[field].append(self.duplicates_info()[field][key])
             general_list.append(field_dict)
         return general_list
 
     def duplicates_merge(self, *fields):
-        for field in fields:
-            pass
+        if self.duplicates_compare()[0][fields[0]][0] == self.duplicates_compare()[fields[1]][0][0]:
+            print(dict_[fields[0]][0][0])
+            # pass
+            # for dict_ in self.duplicates_compare():
+            # print(i)
+                # for entry in list_:
+                #     if self.entries[entry]
