@@ -61,7 +61,30 @@ class Contact_book:
     #         fields_to_check = self.headers
     #     else:
     #         fields_to_check = fields
-    #     for field in fields_to_check:
-    #         print(field)
-    #         for key in self.duplicates_info()[field].keys():
-    #             print(self.duplicates_info()[field][key])
+    #     list_of_lists_of_duplicated_entries_indicies = []
+    #     for field in fields_to_check: # уровень поля
+    #         list_of_entries_with_duplicates_within_the_field = []
+    #         duplicates_of_one_value = []
+    #         for key in self.duplicates_info()[field].keys(): # уровень дублированных значений внутри поля
+    #             duplicates_of_one_value.append(self.duplicates_info()[field][key]) # кладем список номеров дублир записей для одного значения в список
+    #         list_of_entries_with_duplicates_within_the_field.append(duplicates_of_one_value)
+    #     list_of_lists_of_duplicated_entries_indicies.append(list_of_entries_with_duplicates_within_the_field)
+    #     return list_of_lists_of_duplicated_entries_indicies
+
+    def duplicates_del(self, *fields, **fields_pairs):
+        general_list = []
+        '''
+        для каждого field (фамилия) - получаем список номеров (их может быть несколько)
+        по каждому номеру из списка проверяем, совпадает ли его имя с именем этого номера 
+        в каждом списке каждый номер сравнить с этим же номером но другим field
+        :param fields: 
+        :return: 
+        '''
+        for field_index, field in enumerate(fields):
+            field_dict = {field:[]}
+            for key in self.duplicates_info()[field].keys(): # <- список ключей к спискам номеров записей
+                # field_list.append({field: self.duplicates_info()[field][key]})
+                field_dict[field].append(self.duplicates_info()[field][key])
+            general_list.append(field_dict)
+        return general_list
+
