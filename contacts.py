@@ -61,13 +61,13 @@ class Contact_book:
             fields_to_check = self.headers
         else:
             fields_to_check = fields
-        general_list = []
+        general_dict = {}
         for field in fields_to_check:
-            field_dict = {field:[]}
+            field_list = []
             for key in self.duplicates_info()[field].keys():
-                field_dict[field].append(self.duplicates_info()[field][key])
-            general_list.append(field_dict)
-        return general_list
+                field_list.append(self.duplicates_info()[field][key])
+            general_dict.setdefault(field, field_list)
+        return general_dict
 
     def duplicates_merge(self, *fields):
         if self.duplicates_compare()[0][fields[0]][0] == self.duplicates_compare()[fields[1]][0][0]:
