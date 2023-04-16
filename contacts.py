@@ -156,5 +156,15 @@ class Contact_book:
                     return f'No duplications in the requested fields.'
 
         if result:
-            indeces = self.duplicates_compare()[fields[0]]
-            print(indeces)
+            indeces = self.duplicates_compare()[fields[0]] # т.к. вложенные списки совпали для всех полей, берем первое (ield[0])
+            the_list = []
+            for header in self.entries_dict().keys():
+                nestedval = []
+                the_list.append(nestedval)
+                for nested_list in indeces:
+                    indexval = []
+                    nestedval.append(indexval)
+                    for index in nested_list:
+                        indexval.append(self.entries_dict()[header][index])
+            pprint(the_list)
+
