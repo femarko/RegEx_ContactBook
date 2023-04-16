@@ -147,7 +147,6 @@ class Contact_book:
             fields_to_check = self.headers
         else:
             fields_to_check = fields
-            # first_argument = fields[0]
 
         for field in fields_to_check[1:]: # итерируемся по кортежу аргументов, кроме первого аргумента
             for num, nested_list in enumerate(self.duplicates_compare()[fields[0]]): # итерируемся по списку из [field_to_check]
