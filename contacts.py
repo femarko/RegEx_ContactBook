@@ -98,7 +98,7 @@ class Contact_book:
             duplicates_dict.setdefault(field, field_list)
         return duplicates_dict
 
-    def duplicates_merge(self, *fields):
+    def duplication_per_fields(self, *fields):
         '''
     1. Получить сравниваемые поля (*fields)
 	2. Первое поле (fields[0]) сравнить с остальными (for field in fields[1:]:):
@@ -153,19 +153,9 @@ class Contact_book:
             for num, nested_list in enumerate(self.duplicates_compare()[fields[0]]): # итерируемся по списку из [field_to_check]
                 if self.duplicates_compare()[field][num] == self.duplicates_compare()[fields[0]][num]:
                     result = True
+                else:
+                    return f'No duplications in the requested fields.'
 
         if result:
-            for item in self.headers:
-                for num, nested_list in enumerate(self.duplicates_compare()[item]):
-                    for position, index_ in enumerate(nested_list):  # итерируемся по вложенному списку - создаем список кортежей
-                        print(f'{self.entries_dict()[item][index_]} | {item} {nested_list} {position}')
-                        print(f'{self.entries_dict()[item][self.duplicates_compare()[item][num][position]]} | {item} {nested_list} {position}')
-                        # tuples_list.append(
-                        #     zip(self.entries_dict()[fields[0]][index_], self.entries_dict()[self.duplicates_compare()[field][num][index_]])
-                        # )
-                        # print(tuples_list)
-
-
-
-
-
+            indeces = self.duplicates_compare()[fields[0]]
+            print(indeces)
