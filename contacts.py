@@ -173,15 +173,21 @@ class Contact_book:
                 # iteration += 1
             # pprint(the_list)
 
+        print(indeces)
+        f_list = []
         for comparisons_list in the_list:
+            comparison_length = []
+            f_list.append(comparisons_list)
             for comparison in comparisons_list:
                 lens_of_values = []
+                comparison_length.append((lens_of_values))
                 for entry_value_index, entry_value in enumerate(comparison):
                     lens_of_values.append(len(entry_value))
                     # print(f'{entry_value} {type(entry_value)} {len(entry_value)}')
                     # print(f'{max(len(entry_value))} {entry_value_index}')
                 print(f'{lens_of_values} {max(lens_of_values)} {comparison}')
-
+        print('===========')
+        print(comparison_length)
         # return the_list
 
 
