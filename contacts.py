@@ -158,13 +158,25 @@ class Contact_book:
         if result:
             indeces = self.duplicates_compare()[fields[0]] # т.к. вложенные списки совпали для всех полей, берем первое (ield[0])
             the_list = []
+            # iteration = 0
             for header in self.entries_dict().keys():
                 nestedval = []
                 the_list.append(nestedval)
+                # print(f'iteration:{iteration} header:{header} nestedval:{nestedval} the_list:{the_list}')
                 for nested_list in indeces:
                     indexval = []
                     nestedval.append(indexval)
+                    # print(f'\t\t - nested_list:{nested_list} indexval:{indexval} nestedval:{nestedval}')
                     for index in nested_list:
                         indexval.append(self.entries_dict()[header][index])
-            pprint(the_list)
+                        # print(f'\t\t\tindex:{index} indexval:{indexval}')
+                # iteration += 1
+            # pprint(the_list)
+
+        for list_in_the_list_index, list_in_the_list in enumerate(the_list):
+            for element_index, element in list_in_the_list:
+                print(element)
+
+        # return the_list
+
 
