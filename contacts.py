@@ -149,14 +149,14 @@ class Contact_book:
             fields_to_check = fields
 
         for field in fields_to_check[1:]: # итерируемся по кортежу аргументов, кроме первого аргумента
-            for num, nested_list in enumerate(self.duplicates_compare()[fields[0]]): # итерируемся по списку из [field_to_check]
+            for num, nested_list in enumerate(self.duplicates_compare()[fields[0]]): # итерируемся по списку из [fields_to_check]
                 if self.duplicates_compare()[field][num] == self.duplicates_compare()[fields[0]][num]:
                     result = True
                 else:
-                    return f'No duplications in the requested fields.'
+                    return f'Entries with values, duplicated in all requested fields, are not found.'
 
         if result:
-            indeces = self.duplicates_compare()[fields[0]] # т.к. вложенные списки совпали для всех полей, берем первое (ield[0])
+            indeces = self.duplicates_compare()[fields[0]] # т.к. вложенные списки совпали для всех полей, берем первое (field[0])
             the_list = []
             # iteration = 0
             for header in self.entries_dict().keys():
@@ -173,9 +173,14 @@ class Contact_book:
                 # iteration += 1
             # pprint(the_list)
 
-        for list_in_the_list_index, list_in_the_list in enumerate(the_list):
-            for element_index, element in list_in_the_list:
-                print(element)
+        for comparisons_list in the_list:
+            for comparison in comparisons_list:
+                lens_of_values = []
+                for entry_value_index, entry_value in enumerate(comparison):
+                    lens_of_values.append(len(entry_value))
+                    # print(f'{entry_value} {type(entry_value)} {len(entry_value)}')
+                    # print(f'{max(len(entry_value))} {entry_value_index}')
+                print(f'{lens_of_values} {max(lens_of_values)} {comparison}')
 
         # return the_list
 
