@@ -182,24 +182,15 @@ class Contact_book:
             dicttt[field_index] = {}
             for nested_list_index, nested_list in enumerate(field_values):
                 dicttt[field_index][nested_list_index] = []
-                # print(field_index)
-                # print(dicttt)
-                # pprint(dicttt)
-        #     # comparison_length = []
-        #     # f_list.append(comparisons_list)
-        #     for i, j in enumerate(field_values):
-        # lens_of_values = []
-        #         comparison_length.append((lens_of_values))
-        #         entry_values_length = {field}
                 for entry_value_index, entry_value in enumerate(nested_list):
                     dicttt[field_index][nested_list_index].append(len(entry_value))
-                    # entry_values_length.append(len(entry_value))
-        #             lens_of_values.append(len(entry_value))
-        #             # print(f'{entry_value} {type(entry_value)} {len(entry_value)}')
-        #             # print(f'{max(len(entry_value))} {entry_value_index}')
-        #         # print(f'{lens_of_values} {max(lens_of_values)} {comparison}')
-        # print('===========')
-        # print(comparison_length)
+
+        for key in dicttt.keys():
+            for key_nest, value in dicttt[key].items():
+                for length in dicttt[key][key_nest]:
+                    if length == max(value):
+                        dicttt[key][key_nest] = value.index(length)
+
         return dicttt
 
 
