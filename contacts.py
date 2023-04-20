@@ -35,26 +35,22 @@ class Contact_book:
 
     def duplicates_info(self, *fields):
         '''
-        Возвращается словарь duplicates_dict.
+        Возвращается словарь duplicates_dict, в котором:
+        - ключи - это полученные аргументы (field in fields) - обрабатываемые заголовки телефонной книги
+        - значения - вложенные словари, в которых:
+            - ключи - те значения поля (field), которые повторяются в двух и более записях телефонной книги
+            - значения - списки всех вхождеий (индексов) повторящихся значений поля
 
         Параметры:
         - на вход принимается любое количество заголовков телефонной книги
-        - если параметры не переданы, обрабатываются все заголовки телефонной книги.
+        - если параметры не переданы, обрабатываются все заголовки телефонной книги (список, хранящийся в атрибуте
+          self.headers)
 
         Обработка заголовков (fields):
-        - если длина списка, полученного по ключу field из словаря self.entries_dict(), не равна длине
-          множества, полученного из этого списка (проверка наличия повторяющихся элементов), field
-          становится ключом словаря duplicates_dict.
-
-        Словарь duplicates_dict:
-        - ключи - полученные аргументы (field in fields) - обрабатываемые заголовки телефонной книги
-        - значения - вложенные словари, в которых:
-            - ключи - элементы списка, полученного по ключу обрабатываемого заголовка (field) из словаря
-              self.entries_dict() (список из словаря self.entries_dict())
-            - значения - списки всех вхождеий (индексов) повторящихся элементов указанного списка
-              из словаря self.entries_dict()
+        - если длина списка, полученного по ключу field из словаря, возвращаемого функцией self.entries_dict(), не равна
+          длине множества, полученного из этого списка (проверка наличия повторяющихся элементов), field становится
+          ключом словаря duplicates_dict.
         '''
-
         duplicates_dict = {}
 
         if len(fields) == 0:
@@ -85,7 +81,6 @@ class Contact_book:
         словаря является список списков. Каждый вложенный список состоит из вхождений (индексов)
         повторяющихся элементов списка, полученного по ключу field из словаря self.entries_dict().
         '''
-
         if len(fields) == 0:
             fields_to_check = self.headers
         else:
@@ -100,49 +95,8 @@ class Contact_book:
 
     def duplication_per_fields(self, *fields):
         '''
-    1. Получить сравниваемые поля (*fields)
-	2. Первое поле (fields[0]) сравнить с остальными (for field in fields[1:]:):
-	    -равен ли каждый из вложенных списков первого поля вложенным спискам остальных полей?
-	for nested_list in
-	(if self.duplicates_compare()[field][nested_list]==self.duplicates_compare[fields[0]][nested_list])
-	Если да: zip(self.entries_dict()[field[0]][nested_list], self.duplicates_compare()[field][nested_list])
-    Результат zip записываем в список
+    Возвращает словарь, где ключи - индексы полей в словаре self.
         '''
-        # list_1 = self.duplicates_compare()[field_1]
-        # list_2 = self.duplicates_compare()[field_2]
-        # entries_to_merge_list = []
-        # for pare_of_entries in list_1:
-        #     pare_of_entries_list = []
-        #     if list_2[list_1.index(pare_of_entries)] == pare_of_entries:
-        #         pare_of_entries_list.append(pare_of_entries)
-        #     entries_to_merge_list.append(pare_of_entries)
-        # pprint(entries_to_merge_list)
-        #
-        #
-        # if entries_to_merge_list:
-        #     list_to_zip = []
-        #     for list_ in entries_to_merge_list:
-        #         print(f'list_ {type(list_)} {list_}')
-        #         entries_to_merge = []
-        #         for entry_index in list_:
-        #             entries_to_merge.append(self.entries[entry_index])
-        #         list_to_zip.append(entries_to_merge)
-        #
-        # else:
-        #     return
-        # pprint((list_to_zip))
-        #
-        #
-        # zipped = []
-        # if list_to_zip:
-        #
-        #     for item in list_to_zip:
-        #         for el in item:
-        #             zipped.append(zip(item))
-        # print(zipped)
-        #
-        # for i in zipped[0]:
-        #     print(i)
         if len(fields) == 0:
             fields_to_check = self.headers
         else:
@@ -184,6 +138,8 @@ class Contact_book:
                 dicttt[field_index][nested_list_index] = []
                 for entry_value_index, entry_value in enumerate(nested_list):
                     dicttt[field_index][nested_list_index].append(len(entry_value))
+
+        final_list = self.correct_names_and_phones()
 
         for key in dicttt.keys():
             for key_nest, value in dicttt[key].items():
