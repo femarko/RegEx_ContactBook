@@ -93,7 +93,7 @@ class Contact_book:
             duplicates_dict.setdefault(field, field_list)
         return duplicates_dict
 
-    def del_dict(self, *fields):
+    def _del_dict(self, *fields):
         '''
     Возвращает словарь, где ключи - поля телефонной книги, значения - списки индексов записей, подлежащих удалению в
     соответствующем поле.
@@ -145,5 +145,13 @@ class Contact_book:
                     if list_.index(entr) != indeces_dict[header][num_list_]:
                         del_dict[header].append(entr)
 
-        return del_dict
+        pure_dict = {}
+        pprint(pure_dict)
+        for contact_field, list_to_del in del_dict.items():
+            list_for_contact_field = self.entries_dict()[contact_field].pop(list_to_del[0])
+            for item in list_to_del[1:]:
+                list_for_contact_field.append(self.entries_dict().pop(item))
+        #
+        #
+        # return pure_dict
 
