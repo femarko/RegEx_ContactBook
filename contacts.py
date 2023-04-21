@@ -139,7 +139,7 @@ class Contact_book:
                 for entry_value_index, entry_value in enumerate(nested_list):
                     dicttt[self.headers[field_index]][nested_list_index].append(len(entry_value))
 
-        final_list = self.correct_names_and_phones()
+        pprint(dicttt)
 
         for key in dicttt.keys():
             for key_nest, value in dicttt[key].items():
@@ -147,6 +147,62 @@ class Contact_book:
                     if length == max(value):
                         dicttt[key][key_nest] = value.index(length)
 
-        return dicttt
+        del_dict = {}
+        for header in self.headers:
+            del_dict[header] = []
+            for num_list_, list_ in enumerate(indeces):
+                # print(list_)
+                for entr in list_:
+                    if list_.index(entr) != dicttt[header][num_list_]:
+                        del_dict[header].append(entr)
+        # deletion_dict = {}
+        # for ind, list_of_indeces in indeces:
+        #     for header in self.headers:
+        #         for list_ in indeces:
+        #
+        #         deletion_dict[header] =
+        # final_dict = {}
+        # for key in dicttt.keys():
+        #     final_dict[key] = []
+        #     for key_nest, value in dicttt[key].items():
+        #         max_length = max(value)
+        #         print(value)
+        #         for length in dicttt[key][key_nest]:
+        #             if length == max_length and value.index(length) == 0:
+        #                 continue
+        #             else:
+        #                 final_dict[key].append(length)
 
+        # for key in dicttt.keys():
+        #     final_dict[key] = []
+        #     for nested_length in dicttt.values():
+        #         print(nested_length)
+                # max_nested_length = max(nested_length)
+                # for length in nested_length:
+                #     if length == max_nested_length and nested_length.index(length) == 0:
+                #         continue
+                #     else:
+                #         final_dict[key].append(length)
+
+
+
+        # final_dict = {}
+        #
+        # for key, value in dicttt.items():
+        #     final_dict[key] = []
+        #     for key_n, value_n in value.items():
+        #         max_length = max(dicttt[key][key_n])
+        #         final_dict[key] = [value_n]
+        #         pprint(final_dict)
+        #         # print(max_length)
+                # for length in dicttt[key][key_n]:
+                #     # print(f'{key} {key_n} {length}')
+                #     # if len(set(dicttt[key][key_n])) == len(dicttt[key][key_n]):
+                #     if length != max_length:
+                #             final_dict[key][value_n].append(indeces[key_n][(dicttt[key][key_n].index(length))])
+                #     else:
+                #         final_dict[key][value_n.append(indeces[key_n][0])
+                # pprint(final_dict)
+
+        return del_dict
 
