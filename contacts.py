@@ -133,11 +133,11 @@ class Contact_book:
         dicttt = {}
 
         for field_index, field_values in enumerate(the_list):
-            dicttt[field_index] = {}
+            dicttt[self.headers[field_index]] = {}
             for nested_list_index, nested_list in enumerate(field_values):
-                dicttt[field_index][nested_list_index] = []
+                dicttt[self.headers[field_index]][nested_list_index] = []
                 for entry_value_index, entry_value in enumerate(nested_list):
-                    dicttt[field_index][nested_list_index].append(len(entry_value))
+                    dicttt[self.headers[field_index]][nested_list_index].append(len(entry_value))
 
         final_list = self.correct_names_and_phones()
 
