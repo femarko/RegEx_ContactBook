@@ -98,60 +98,79 @@ class Contact_book:
     Возвращает словарь, где ключи - поля телефонной книги, значения - списки индексов записей, подлежащих удалению в
     соответствующем поле.
         '''
-        if len(fields) == 0:
-            fields_to_check = self.headers
-        else:
-            fields_to_check = fields
-
-        for field in fields_to_check[1:]: # итерируемся по кортежу аргументов, кроме первого аргумента
+        duplicates_dict = self.duplicates_compare(*fields)
+        # if len(fields) == 0:
+        #     fields_to_check = self.headers
+        # # else:
+        #     fields_to_check = fields
+        count = 0
+        for field in fields[1:]: # итерируемся по кортежу аргументов, кроме первого аргумента
             for num, nested_list in enumerate(self.duplicates_compare()[fields[0]]): # итерируемся по списку из fields_to_check
                 if self.duplicates_compare()[field][num] == self.duplicates_compare()[fields[0]][num]:
-                    result = True
+                    count += 1
+                    continue
                 else:
-                    return f'Entries with values, duplicated in all requested fields, are not found.'
-
+                    break
+        if count < len(fields[1:]):
+            print('Not all requested entries are duplicated.')
+            return
+        else:
+            result = True
+        print(result)
+        pprint(duplicates_dict)
         if result:
-            indeces = self.duplicates_compare()[fields[0]] # т.к. вложенные списки совпали для всех полей, берем первое (field[0])
+            indeces = self.duplicates_dict[fields[0]] # т.к. вложенные списки совпали для всех полей, берем первое (field[0])
             the_list = []
-            for header in self.entries_dict().keys():
-                nestedval = []
-                the_list.append(nestedval)
-                for nested_list in indeces:
-                    indexval = []
-                    nestedval.append(indexval)
-                    for index in nested_list:
-                        indexval.append(self.entries_dict()[header][index])
-
-        indeces_dict = {}
-
-        for field_index, field_values in enumerate(the_list):
-            indeces_dict[self.headers[field_index]] = {}
-            for nested_list_index, nested_list in enumerate(field_values):
-                indeces_dict[self.headers[field_index]][nested_list_index] = []
-                for entry_value_index, entry_value in enumerate(nested_list):
-                    indeces_dict[self.headers[field_index]][nested_list_index].append(len(entry_value))
-
-        for key in indeces_dict.keys():
-            for key_nest, value in indeces_dict[key].items():
-                for length in indeces_dict[key][key_nest]:
-                    if length == max(value):
-                        indeces_dict[key][key_nest] = value.index(length)
-
-        del_dict = {}
-        for header in self.headers:
-            del_dict[header] = []
-            for num_list_, list_ in enumerate(indeces):
-                for entr in list_:
-                    if list_.index(entr) != indeces_dict[header][num_list_]:
-                        del_dict[header].append(entr)
-
-        pure_dict = {}
-        pprint(pure_dict)
-        for contact_field, list_to_del in del_dict.items():
-            list_for_contact_field = self.entries_dict()[contact_field].pop(list_to_del[0])
-            for item in list_to_del[1:]:
-                list_for_contact_field.append(self.entries_dict().pop(item))
+        #     for header in self.entries_dict().keys():
+        #         nestedval = []
+        #         the_list.append(nestedval)
+        #         for nested_list in indeces:
+        #             indexval = []
+        #             nestedval.append(indexval)
+        #             for index in nested_list:
+        #                 indexval.append(self.entries_dict()[header][index])
+        #
+        #     indeces_dict = {}
+        #
+        #     for field_index, field_values in enumerate(the_list):
+        #         indeces_dict[self.headers[field_index]] = {}
+        #         for nested_list_index, nested_list in enumerate(field_values):
+        #             indeces_dict[self.headers[field_index]][nested_list_index] = []
+        #             for entry_value_index, entry_value in enumerate(nested_list):
+        #                 indeces_dict[self.headers[field_index]][nested_list_index].append(len(entry_value))
+        #
+        #     for key in indeces_dict.keys():
+        #         for key_nest, value in indeces_dict[key].items():
+        #             for length in indeces_dict[key][key_nest]:
+        #                 if length == max(value):
+        #                     indeces_dict[key][key_nest] = value.index(length)
+        #
+        #     del_dict = {}
+        #     for header in self.headers:
+        #         del_dict[header] = []
+        #         for num_list_, list_ in enumerate(indeces):
+        #             for entr in list_:
+        #                 if list_.index(entr) != indeces_dict[header][num_list_]:
+        #                     del_dict[header].append(entr)
+        #     return del_dict
+    def target(self, *fields):
+        del_dict = self._del_dict(*fields)
+        pprint(del_dict)
+        # pure_dict = {}
+        # pprint(pure_dict)
+        # for contact_field, list_to_del in del_dict.items():
+        #     list_for_contact_field = self.entries_dict()[contact_field].pop(list_to_del[0])
+        #     for item in list_to_del[1:]:
+        #         list_for_contact_field.append(self.entries_dict().pop(item))
         #
         #
         # return pure_dict
 
+    # def accept(self, *fields):
+    #     fields_list = []
+    #     for field in fields:
+    #         fields_list.append(field)
+    #     return fields_list
+    #
+    # def exp(self, *fields):
+    #     print(self.accept(*fields))
