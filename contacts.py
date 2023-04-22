@@ -99,6 +99,7 @@ class Contact_book:
     соответствующем поле.
         '''
         duplicates_dict = self.duplicates_compare(*fields)
+        print(f'fields {fields}')
         # if len(fields) == 0:
         #     fields_to_check = self.headers
         # # else:
@@ -107,6 +108,7 @@ class Contact_book:
         for field in fields[1:]: # итерируемся по кортежу аргументов, кроме первого аргумента
             for num, nested_list in enumerate(self.duplicates_compare()[fields[0]]): # итерируемся по списку из fields_to_check
                 if self.duplicates_compare()[field][num] == self.duplicates_compare()[fields[0]][num]:
+                    print(self.duplicates_compare()[field][num])
                     count += 1
                     continue
                 else:
@@ -119,7 +121,7 @@ class Contact_book:
         print(result)
         print(f'duplicates_dict {type(duplicates_dict)} {duplicates_dict}')
         if result:
-            indeces = duplicates_dict[fields[0]] # т.к. вложенные списки совпали для всех полей, берем первое (field[0])
+            indeces = self.duplicates_compare()[fields[0]] # т.к. вложенные списки совпали для всех полей, берем первое (field[0])
             the_list = []
         #     for header in self.entries_dict().keys():
         #         nestedval = []
