@@ -117,9 +117,9 @@ class Contact_book:
         else:
             result = True
         print(result)
-        pprint(duplicates_dict)
+        print(f'duplicates_dict {type(duplicates_dict)} {duplicates_dict}')
         if result:
-            indeces = self.duplicates_dict[fields[0]] # т.к. вложенные списки совпали для всех полей, берем первое (field[0])
+            indeces = duplicates_dict[fields[0]] # т.к. вложенные списки совпали для всех полей, берем первое (field[0])
             the_list = []
         #     for header in self.entries_dict().keys():
         #         nestedval = []
