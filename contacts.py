@@ -41,15 +41,6 @@ class Contact_book:
                 entries_dict[header][entry_index] = entry[header_index]
         return entries_dict
 
-    def entries_dict_entry_indeces_as_keys(self):
-        entries_dict = {}
-        for entry_index, entry in enumerate(self.correct_names_and_phones()):
-            entries_dict[entry_index] = []
-            for item_index, item in enumerate(entry):
-                print(f'item_index: {item_index} item: {item}')
-                # entries_dict[entry_index].append({self.headers[item_index]: item})
-        # return entries_dict
-
     def duplicates_info(self, *fields):
         '''
         Возвращается словарь duplicates_dict, в котором:
