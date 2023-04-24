@@ -41,6 +41,14 @@ class Contact_book:
                 entries_dict[header][entry_index] = entry[header_index]
         return entries_dict
 
+    def new_dupl_dict(self):
+        dupl_dict = {}
+        for header, entries in self.new_func().items():
+            if len(entries.values()) != len(str(set(entries.values()))):
+                for entry_index, entry in entries.items():
+                    dupl_dict[header] = entry_index
+        return dupl_dict
+
     def duplicates_info(self, *fields):
         '''
         Возвращается словарь duplicates_dict, в котором:
