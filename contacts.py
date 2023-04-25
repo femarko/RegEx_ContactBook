@@ -44,9 +44,11 @@ class Contact_book:
     def new_dupl_dict(self):
         dupl_dict = {}
         for header, entries in self.new_func().items():
-            if len(entries.values()) != len(str(set(entries.values()))):
+            if len(self.entries_dict_fields_as_keys()[header]) != len(set(self.entries_dict_fields_as_keys()[header])):
+                print(f'{len(self.entries_dict_fields_as_keys()[header])} {len(set(self.entries_dict_fields_as_keys()[header]))}')
+                dupl_dict[header] = []
                 for entry_index, entry in entries.items():
-                    dupl_dict[header] = entry_index
+                    dupl_dict[header].append(entry_index)
         return dupl_dict
 
     def duplicates_info(self, *fields):
