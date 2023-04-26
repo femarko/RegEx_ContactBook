@@ -62,8 +62,12 @@ class Contact_book:
 
     def new_dupl_del(self, *fields):
         dupl_dict = self.new_dupl_dict(*fields)
+        dupl_group_numbers_list = []
+        for header, indeces_dict in dupl_dict.items():
+            for key, value in indeces_dict.items():
+                dupl_group_numbers_list.append(key)
 
-        return dupl_dict
+        return list(set(dupl_group_numbers_list))
 
     def duplicates_info(self, *fields):
         '''
