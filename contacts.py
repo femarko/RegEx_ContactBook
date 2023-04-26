@@ -53,11 +53,11 @@ class Contact_book:
                 dupl_dict[header] = {}
                 for entry_index, entry in enumerate(self.entries_dict()[header]):
                     if entry_index != self.entries_dict()[header].index(entry):
-                        dupl_dict[header][entry] = []
-                        dupl_dict[header][entry].append(self.entries_dict()[header].index(entry))
+                        dupl_dict[header][self.entries_dict()[header].index(entry)] = []
+                        dupl_dict[header][self.entries_dict()[header].index(entry)].append(self.entries_dict()[header].index(entry))
                 for entry_index, entry in enumerate(self.entries_dict()[header]):
                     if entry_index != self.entries_dict()[header].index(entry):
-                        dupl_dict[header][entry].append(entry_index)
+                        dupl_dict[header][self.entries_dict()[header].index(entry)].append(entry_index)
         return dupl_dict
 
     def new_dupl_del(self, *fields):
