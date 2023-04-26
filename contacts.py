@@ -24,7 +24,7 @@ class Contact_book:
             correct_names_and_phones_list.append(contact)
         return correct_names_and_phones_list
 
-    def entries_dict_fields_as_keys(self):
+    def entries_dict(self):
         entries_dict = {}
         for header_index, header in enumerate(self.headers):
             values_indicies_list = []
@@ -44,11 +44,12 @@ class Contact_book:
     def new_dupl_dict(self):
         dupl_dict = {}
         for header, entries in self.new_func().items():
-            if len(self.entries_dict_fields_as_keys()[header]) != len(set(self.entries_dict_fields_as_keys()[header])):
-                print(f'{len(self.entries_dict_fields_as_keys()[header])} {len(set(self.entries_dict_fields_as_keys()[header]))}')
+            if len(self.entries_dict()[header]) != len(set(self.entries_dict()[header])):
+                print(f'{len(self.entries_dict()[header])} {len(set(self.entries_dict()[header]))}')
                 dupl_dict[header] = []
-                for entry_index, entry in entries.items():
-                    dupl_dict[header].append(entry_index)
+                for entry_index, entry in enumerate(self.entries_dict()[header]):
+                    if entry_index != self.entries_dict()[header].index(entry):
+                        dupl_dict[header].append(entry_index)
         return dupl_dict
 
     def duplicates_info(self, *fields):
@@ -65,7 +66,7 @@ class Contact_book:
           self.headers)
 
         Обработка заголовков (fields):
-        - если длина списка, полученного по ключу field из словаря, возвращаемого функцией self.entries_dict_fields_as_keys(), не равна
+        - если длина списка, полученного по ключу field из словаря, возвращаемого функцией self.entries_dict(), не равна
           длине множества, полученного из этого списка (проверка наличия повторяющихся элементов), field становится
           ключом словаря duplicates_dict.
         '''
@@ -78,11 +79,11 @@ class Contact_book:
 
         for field in fields_to_check:
             duplicates_dict.setdefault(field, {})
-            if len(self.entries_dict_fields_as_keys()[field]) != len(str(set(self.entries_dict_fields_as_keys()[field]))):
-                for element_index, element in enumerate(self.entries_dict_fields_as_keys()[field]):
-                    duplicates_dict[field][element] = [self.entries_dict_fields_as_keys()[field].index(element)]
-                for element_index, element in enumerate(self.entries_dict_fields_as_keys()[field]):
-                    if element_index != self.entries_dict_fields_as_keys()[field].index(element):
+            if len(self.entries_dict()[field]) != len(str(set(self.entries_dict()[field]))):
+                for element_index, element in enumerate(self.entries_dict()[field]):
+                    duplicates_dict[field][element] = [self.entries_dict()[field].index(element)]
+                for element_index, element in enumerate(self.entries_dict()[field]):
+                    if element_index != self.entries_dict()[field].index(element):
                         duplicates_dict[field][element].append(element_index)
                 keys_to_delete_list = []
                 for key in duplicates_dict.keys():
@@ -97,7 +98,7 @@ class Contact_book:
         '''
         Возвращается словарь duplicates_dict. В отличие от self.duplicates_info, значением ключа этого
         словаря является список списков. Каждый вложенный список состоит из вхождений (индексов)
-        повторяющихся элементов списка, полученного по ключу field из словаря self.entries_dict_fields_as_keys().
+        повторяющихся элементов списка, полученного по ключу field из словаря self.entries_dict().
         '''
         if len(fields) == 0:
             fields_to_check = self.headers
@@ -142,14 +143,14 @@ class Contact_book:
         if result:
             indeces = self.duplicates_compare()[fields_to_check[0]] # т.к. вложенные списки совпали для всех полей, берем первое (field[0])
             the_list = []
-        #     for header in self.entries_dict_fields_as_keys().keys():
+        #     for header in self.entries_dict().keys():
         #         nestedval = []
         #         the_list.append(nestedval)
         #         for nested_list in indeces:
         #             indexval = []
         #             nestedval.append(indexval)
         #             for index in nested_list:
-        #                 indexval.append(self.entries_dict_fields_as_keys()[header][index])
+        #                 indexval.append(self.entries_dict()[header][index])
         #
         #     indeces_dict = {}
         #
@@ -180,9 +181,9 @@ class Contact_book:
         # pure_dict = {}
         # pprint(pure_dict)
         # for contact_field, list_to_del in del_dict.items():
-        #     list_for_contact_field = self.entries_dict_fields_as_keys()[contact_field].pop(list_to_del[0])
+        #     list_for_contact_field = self.entries_dict()[contact_field].pop(list_to_del[0])
         #     for item in list_to_del[1:]:
-        #         list_for_contact_field.append(self.entries_dict_fields_as_keys().pop(item))
+        #         list_for_contact_field.append(self.entries_dict().pop(item))
         #
         #
         # return pure_dict
