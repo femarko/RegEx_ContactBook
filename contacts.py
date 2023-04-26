@@ -45,11 +45,14 @@ class Contact_book:
         dupl_dict = {}
         for header, entries in self.new_func().items():
             if len(self.entries_dict()[header]) != len(set(self.entries_dict()[header])):
-                print(f'{len(self.entries_dict()[header])} {len(set(self.entries_dict()[header]))}')
-                dupl_dict[header] = []
+                dupl_dict[header] = {}
                 for entry_index, entry in enumerate(self.entries_dict()[header]):
                     if entry_index != self.entries_dict()[header].index(entry):
-                        dupl_dict[header].append(entry_index)
+                        dupl_dict[header][entry] = []
+                        dupl_dict[header][entry].append(self.entries_dict()[header].index(entry))
+                for entry_index, entry in enumerate(self.entries_dict()[header]):
+                    if entry_index != self.entries_dict()[header].index(entry):
+                        dupl_dict[header][entry].append(entry_index)
         return dupl_dict
 
     def duplicates_info(self, *fields):
