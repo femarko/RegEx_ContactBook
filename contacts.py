@@ -60,6 +60,11 @@ class Contact_book:
                         dupl_dict[header][entry].append(entry_index)
         return dupl_dict
 
+    def new_dupl_del(self, *fields):
+        dupl_dict = self.new_dupl_dict(*fields)
+
+        return dupl_dict
+
     def duplicates_info(self, *fields):
         '''
         Возвращается словарь duplicates_dict, в котором:
