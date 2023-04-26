@@ -41,9 +41,14 @@ class Contact_book:
                 entries_dict[header][entry_index] = entry[header_index]
         return entries_dict
 
-    def new_dupl_dict(self):
+    def new_dupl_dict(self, *fields):
+        if len(fields) != 0:
+            fields_to_check = fields
+        else:
+            fields_to_check = self.headers
         dupl_dict = {}
-        for header, entries in self.new_func().items():
+        for header in fields_to_check:
+        # for header, entries in self.new_func().items():
             if len(self.entries_dict()[header]) != len(set(self.entries_dict()[header])):
                 dupl_dict[header] = {}
                 for entry_index, entry in enumerate(self.entries_dict()[header]):
