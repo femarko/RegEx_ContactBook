@@ -60,29 +60,38 @@ class Contact_book:
                         dupl_dict[header][self.entries_dict()[header].index(entry)].append(entry_index)
         return dupl_dict
 
-    def new_dupl_group_numbers_list(self, *fields):
+    def new_dupl_bul(self, *fields):
         dupl_dict = self.new_dupl_dict(*fields)
-        key_0 = dupl_dict.keys()[0]
+        key_0 = list(dupl_dict.keys())[0]
         result = True
         while result == True:
             for key in list(dupl_dict.keys())[1:]:
-                if key == key_0:
+                if dupl_dict[key] == dupl_dict[key_0]:
                     result = True
                 else:
                     result = False
             break
-        return result
+        return result, dupl_dict[key_0]
+
+    def entries_numbers_delition_list(self, *fields):
+        if self.new_dupl_bul(*fields)[0] == False:
+            return f'Not all entries are duplicated in the requested fields'
+        else:
+            entries_numbers_delition_list = []
+            dict_ = self.new_dupl_bul(*fields)[1]
+            for value in dict_.values():
+                entries_numbers_delition_list.append(value)
+        return entries_numbers_delition_list
+
+
+
         # dupl_group_numbers_list = []
         # for header, indeces_dict in dupl_dict.items():
         #     for key, value in indeces_dict.items():
         #         dupl_group_numbers_list.append(key)
         # return list(set(dupl_group_numbers_list))
 
-    def new_del_dupl(self, *fields):
-        entries_numbers = self.new_dupl_group_numbers_list(*fields)
-        for number in entries_numbers:
-            for header_index, header in enumerate(self.headers):
-                pass
+
 
 
 
