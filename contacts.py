@@ -60,14 +60,19 @@ class Contact_book:
                         dupl_dict[header][self.entries_dict()[header].index(entry)].append(entry_index)
         return dupl_dict
 
-    def new_dupl_del(self, *fields):
+    def dupl_group_numbers_list(self, *fields):
         dupl_dict = self.new_dupl_dict(*fields)
         dupl_group_numbers_list = []
         for header, indeces_dict in dupl_dict.items():
             for key, value in indeces_dict.items():
                 dupl_group_numbers_list.append(key)
+        for number in dupl_group_numbers_list:
+            for header, indeces_dict in dupl_dict.items():
+
 
         return list(set(dupl_group_numbers_list))
+
+
 
     def duplicates_info(self, *fields):
         '''
