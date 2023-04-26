@@ -73,7 +73,7 @@ class Contact_book:
             break
         return result, dupl_dict[key_0]
 
-    def entries_numbers_delition_list(self, *fields):
+    def new_entries_numbers_delition_list(self, *fields):
         if self.new_dupl_bul(*fields)[0] == False:
             return f'Not all entries are duplicated in the requested fields'
         else:
@@ -82,6 +82,16 @@ class Contact_book:
             for value in dict_.values():
                 entries_numbers_delition_list.append(value)
         return entries_numbers_delition_list
+
+    def new_del_dupls(self, *fields):
+        list_ = self.new_entries_numbers_delition_list(*fields)
+        dict_ = self.entries_dict()
+        list_to_choose = []
+        for item in list_:
+            print(item)
+            # for key in dict_.keys():
+            #     list_to_choose.append(dict_[key][item])
+
 
 
 
