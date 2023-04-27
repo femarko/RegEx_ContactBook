@@ -104,7 +104,6 @@ class Contact_book:
         clear_dict = {}
         for list_ in delition_list:
             for dict_ in list_:
-                print(dict_)
                 for key, value in dict_.items():
                     del(auxiliary_dict[key][value])
         for key_, value_ in auxiliary_dict.items():
@@ -114,11 +113,15 @@ class Contact_book:
 
     def del_dupls(self, *fields):
         clear_dict = self.clear_dict(*fields)
-        for key, value in clear_dict.items():
-            pass
-
-            #     list_to_del.append(dict_[key][item])
-
+        entries_qwantity = len(list(clear_dict.values())[0])
+        clear_list = []
+        clear_list.append(self.headers)
+        for number in range(entries_qwantity):
+            auxiliary_list = []
+            for key, value in clear_dict.items():
+                auxiliary_list.append(clear_dict[key][number])
+            clear_list.append(auxiliary_list)
+        return clear_list
 
 
 
