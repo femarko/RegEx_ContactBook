@@ -100,12 +100,16 @@ class Contact_book:
 
     def clear_dict(self, *fields):
         delition_list = self.delition_list(*fields)
-        clear_dict = self.new_header_index_entry()
+        auxiliary_dict = self.new_header_index_entry()
+        clear_dict = {}
         for list_ in delition_list:
             for dict_ in list_:
                 print(dict_)
                 for key, value in dict_.items():
-                    del(clear_dict[key][value])
+                    del(auxiliary_dict[key][value])
+        for key_, value_ in auxiliary_dict.items():
+            for value__ in value_.values():
+                clear_dict[key_] = list(value_.values())
         return clear_dict
 
     def del_dupls(self, *fields):
