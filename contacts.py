@@ -83,7 +83,7 @@ class Contact_book:
                 entries_numbers_delition_list.append(value)
         return entries_numbers_delition_list
 
-    def new_del_dupls(self, *fields):
+    def delition_list(self, *fields):
         list_ = self.new_entries_numbers_delition_list(*fields)
         dict_ = self.entries_dict()
         delition_list = []
@@ -97,6 +97,22 @@ class Contact_book:
                     else:
                         delition_list[list_index].append({header: list_of_indeces[0]})
         return delition_list
+
+    def clear_dict(self, *fields):
+        delition_list = self.delition_list(*fields)
+        clear_dict = self.new_header_index_entry()
+        for list_ in delition_list:
+            for dict_ in list_:
+                print(dict_)
+                for key, value in dict_.items():
+                    del(clear_dict[key][value])
+        return clear_dict
+
+    def del_dupls(self, *fields):
+        clear_dict = self.clear_dict(*fields)
+        for key, value in clear_dict.items():
+            pass
+
             #     list_to_del.append(dict_[key][item])
 
 
