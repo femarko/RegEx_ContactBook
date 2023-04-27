@@ -33,7 +33,7 @@ class Contact_book:
             entries_dict[header] = values_indicies_list
         return entries_dict
 
-    def new_func(self):
+    def new_header_index_entry(self):
         entries_dict = {}
         for header_index, header in enumerate(self.headers):
             entries_dict[header] = {}
@@ -48,7 +48,7 @@ class Contact_book:
             fields_to_check = self.headers
         dupl_dict = {}
         for header in fields_to_check:
-        # for header, entries in self.new_func().items():
+        # for header, entries in self.new_header_index_entry().items():
             if len(self.entries_dict()[header]) != len(set(self.entries_dict()[header])):
                 dupl_dict[header] = {}
                 for entry_index, entry in enumerate(self.entries_dict()[header]):
@@ -86,11 +86,18 @@ class Contact_book:
     def new_del_dupls(self, *fields):
         list_ = self.new_entries_numbers_delition_list(*fields)
         dict_ = self.entries_dict()
-        list_to_choose = []
-        for item in list_:
-            print(item)
-            # for key in dict_.keys():
-            #     list_to_choose.append(dict_[key][item])
+        delition_list = []
+        for list_index, list_of_indeces in enumerate(list_):
+            delition_list.append([])
+            for index in list_of_indeces[1:]:
+                for header in self.headers:
+                    if len(self.new_header_index_entry()[header][index]) <= \
+                            len(self.new_header_index_entry()[header][list_of_indeces[0]]):
+                        delition_list[list_index].append({header: index})
+                    else:
+                        delition_list[list_index].append({header: list_of_indeces[0]})
+        return delition_list
+            #     list_to_del.append(dict_[key][item])
 
 
 
