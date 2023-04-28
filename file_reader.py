@@ -9,8 +9,3 @@ def read_file(file_name):
         entries = all_data[1:]
         return all_data, headers, entries
 
-def write_file(final_file_name, file):
-    with open(final_file_name, "w") as f:
-        datawriter = csv.writer(f, delimiter=',')
-        ## Вместо contacts_list подставьте свой список:
-        datawriter.writerows(file)
