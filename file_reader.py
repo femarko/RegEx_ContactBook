@@ -8,4 +8,3 @@ def read_file(file_name):
         headers = all_data[0]
         entries = all_data[1:]
         return all_data, headers, entries
-
